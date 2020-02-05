@@ -26,9 +26,9 @@
 | 1 | 0 | 1 | 0 |
 | 1 | 1 | 0 | 1 |
 
-![logic](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/F.png)
-![logic](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/AND.png)
-![logic](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/OR.png)
+![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/F.png)
+![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/AND.png)
+![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/OR.png)
 
 
 | **A** | **B** |**C** | **F** | **AND** | **OR** | 
