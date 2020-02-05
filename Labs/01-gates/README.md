@@ -1,4 +1,4 @@
- ![logic](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/Screenshot_2020-02-05_13-42-53.png)
+ ![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/Screenshot_2020-02-05_13-42-53.png)
  
 | **A** | **NOT** |
 | :-: | :-: |
