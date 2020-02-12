@@ -1,4 +1,5 @@
- ![Alt Text](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/Screenshot_2020-02-05_13-42-53.png)
+
+ ![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/Screenshot_2020-02-05_13-42-53.png)
  
 | **A** | **NOT** |
 | :-: | :-: |
@@ -26,9 +27,10 @@
 | 1 | 0 | 1 | 0 |
 | 1 | 1 | 0 | 1 |
 
-![Alt Text](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/F.png)
-![Alt Text](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/AND.png)
-![Alt Text](/home/lab661/Documents/HubacKonecny/Digital-electronics-1/Labs/01-gates/OR.png)
+
+![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/F.png)
+![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/AND.png)
+![logic](https://github.com/jonashubacek/Digital-electronics-1/blob/master/Labs/01-gates/OR.png)
 
 
 | **A** | **B** |**C** | **F** | **AND** | **OR** | 
