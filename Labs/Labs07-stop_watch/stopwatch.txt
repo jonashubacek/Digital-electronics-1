@@ -1,0 +1,57 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity stopwatch is
+port (
+	clk_i      : in  std_logic; -- clock
+	srst_n_i   : in  std_logic; -- synchronous reset, active low
+	ce_100Hz_i : in  std_logic; -- clock enable
+	cnt_en_i   : in  std_logic; -- stopwatch enable
+	
+	sec_h_o    : out std_logic_vector(3 downto 0); -- counter for tens of seconds
+	sec_l_o    : out std_logic_vector(3 downto 0); -- counter for seconds	
+	hth_h_o    : out std_logic_vector(3 downto 0); -- counter for tenths of seconds
+	hth_l_o    : out std_logic_vector(3 downto 0)  -- counter for hundredths of seconds
+		);
+end stopwatch;
+
+
+architecture Behavioral of stopwatch is
+begin
+def: process(clk_i, srst_n_i, ce_100Hz_i, cnt_en_i)
+	  variable help_1 : std_logic_vector(3 downto 0) := x"0"; -- help variable_1
+	  variable help_2 : std_logic_vector(3 downto 0) := x"0"; -- help variable_2
+	  variable help_3 : std_logic_vector(3 downto 0) := x"0"; -- help variable_3
+	  variable help_4 : std_logic_vector(3 downto 0) := x"0"; -- help variable_4
+	begin
+		if srst_n_i = '0' then
+			help_1 := x"0";
+			help_2 := x"0";
+			help_3 := x"0";
+			help_4 := x"0";
+		elsif clk_i  = '1' and cnt_en_i = '1' and rising_edge(ce_100Hz_i) then	
+			help_1 := help_1 + x"1";
+			
+			if help_1 > 9 then help_1 := x"0";
+				help_2 := help_2 + x"1"; 
+			end if; 
+			if help_2 > 9 then help_2 := x"0";
+				help_3 := help_3 + x"1";
+			end if; 
+			if help_3 > 9 then help_3 := x"0";
+				help_4 := help_4 + x"1";
+			end if; 
+			if help_4 > 5 then help_4 := x"0";
+			end if;
+			
+		end if;
+		
+		sec_h_o <= help_4;
+		sec_l_o <= help_3;
+		hth_h_o <= help_2;
+		hth_l_o <= help_1;
+		
+	end process;
+end Behavioral;
