@@ -1,0 +1,90 @@
+--------------------------------------------------------------------------------
+-- Company: 
+-- Engineer:
+--
+-- Create Date:   15:24:40 03/27/2020
+-- Design Name:   
+-- Module Name:   C:/Users/fanda/DIG1_ISE/Labs_08/test.vhd
+-- Project Name:  Labs_08
+-- Target Device:  
+-- Tool versions:  
+-- Description:   
+-- 
+-- VHDL Test Bench Created by ISE for module: controler
+-- 
+-- Dependencies:
+-- 
+-- Revision:
+-- Revision 0.01 - File Created
+-- Additional Comments:
+--------------------------------------------------------------------------------
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+ 
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--USE ieee.numeric_std.ALL;
+ 
+ENTITY test IS
+END test;
+ 
+ARCHITECTURE behavior OF test IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+ 
+    COMPONENT controler
+    PORT(
+         clk_i : IN  std_logic;
+         srst_n_i : IN  std_logic;
+         cnt_en_i : IN  std_logic;
+         lights_o : OUT  std_logic_vector(5 downto 0)
+        );
+    END COMPONENT;
+    
+
+   --Inputs
+   signal clk_i : std_logic := '0';
+   signal srst_n_i : std_logic := '0';
+   signal cnt_en_i : std_logic := '0';
+
+ 	--Outputs
+   signal lights_o : std_logic_vector(5 downto 0);
+
+   -- Clock period definitions
+   constant clk_i_period : time := 10 ns;
+ 
+BEGIN
+ 
+	-- Instantiate the Unit Under Test (UUT)
+   uut: controler PORT MAP (
+          clk_i => clk_i,
+          srst_n_i => srst_n_i,
+          cnt_en_i => cnt_en_i,
+          lights_o => lights_o
+        );
+
+   -- Clock process definitions
+   clk_i_process :process
+   begin
+		clk_i <= '0';
+		wait for clk_i_period/2;
+		clk_i <= '1';
+		wait for clk_i_period/2;
+   end process;
+ 
+
+   -- Stimulus process
+   stim_proc: process
+   begin		
+      srst_n_i <= '1';
+      wait for 400 ns;
+
+        srst_n_i <= '0';
+	cnt_en_i <= '1';
+        wait until rising_edge(clk_i);
+        srst_n_i <= '1';
+
+      wait;
+   end process;
+
+END;

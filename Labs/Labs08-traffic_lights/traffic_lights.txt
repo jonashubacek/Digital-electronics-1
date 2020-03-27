@@ -1,0 +1,137 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date:    14:14:22 03/27/2020 
+-- Design Name: 
+-- Module Name:    traffic_lights - Behavioral 
+-- Project Name: 
+-- Target Devices: 
+-- Tool versions: 
+-- Description: 
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
+library ieee;
+use ieee.std_logic_1164.all;
+--use ieee.std_logic_unsigned.all;
+use ieee.numeric_std.all;
+
+entity controler is
+	port(
+		clk_i    : in std_logic; -- clock
+		srst_n_i : in std_logic; -- synchronous reset (active low)
+		cnt_en_i : in std_logic; -- stopwatch enable (by external switch or push button)
+		lights_o : out std_logic_vector(5 downto 0) -- lights on traffic lights
+	     );
+end entity controler;
+
+architecture traffic of controler is
+	type state_type is (st0, st1, st2, st3, st4, st5);
+	-- s0: traffic light North-South is GREEN and traffic light East-West is RED
+	-- s1: traffic light North-South is YELLOW and traffic light East-West is RED
+	-- s2: traffic light North-South is RED and traffic light East-West is RED
+	-- s3: traffic light North-South is RED and traffic light East-West is GREEN 
+	-- s4: traffic light North-South is RED and traffic light East-West is YELLOW
+	-- s5: traffic light North-South is RED and traffic light East-West is RED   	
+	signal state_position : state_type;	
+	signal count : unsigned(3 downto 0);
+	constant SEC5: unsigned(3 downto 0) := "1111";
+	constant SEC1: unsigned(3 downto 0) := "0011";
+
+begin
+	traffic_lights_is_on : process(clk_i, srst_n_i, cnt_en_i)
+	begin
+		if rising_edge(clk_i) then
+		if srst_n_i = '0' then
+			state_position <= st0;
+			count <= X"0";
+		elsif cnt_en_i = '1' then
+        
+			case state_position is
+		 
+				when st0 =>
+					if count < SEC5 then
+						state_position <= st0;
+						count <= count + 1;
+					else
+						state_position <= st1;
+						count <= X"0";
+					end if;
+				
+				when st1 =>
+					if count < SEC1 then
+						state_position <= st1;
+						count <= count + 1;
+					else
+						state_position <= st2;
+						count <= X"0";
+					end if;
+			
+				when st2 =>
+					if count < SEC1 then
+						state_position <= st2;
+						count <= count + 1;
+					else
+						state_position <= st3;
+						count <= X"0";
+					end if;
+			
+				when st3 =>
+					if count < SEC5 then
+						state_position <= st3;
+						count <= count + 1;
+					else
+						state_position <= st4;
+						count <= X"0";
+					end if;
+				
+				when st4 =>
+					if count < SEC1 then
+						state_position <= st4;
+						count <= count + 1;
+					else
+						state_position <= st5;
+						count <= X"0";
+					end if;
+			
+				when st5 =>
+					if count < SEC1 then
+						state_position <= st5;
+						count <= count + 1;
+					else
+						state_position <= st0;
+						count <= X"0";
+					end if;
+			
+				when others =>
+					state_position <= st0;
+			end case;
+		end if;
+		end if;
+	end process traffic_lights_is_on;
+	
+	lights_to_dig : process(state_position)
+		begin
+			case state_position is
+				when st0 => lights_o <= "100001";
+				when st1 => lights_o <= "100010";
+				when st2 => lights_o <= "100100";
+				when st3 => lights_o <= "001100";
+				when st4 => lights_o <= "010100";
+				when st5 => lights_o <= "100100";
+				when others => lights_o <= "100001";
+			end case;
+	end process lights_to_dig;
+end traffic;	
+	
+	
+	
+	
+	
+	
